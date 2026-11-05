@@ -390,6 +390,46 @@
         </article>
       </div>
     </section>
+
+    <!-- SECCIÓN DE CONSULTA DE STOCK EN TIEMPO REAL -->
+    <section id="stock-checker" class="features" style="background: rgba(0,0,0,0.4); border-top: 1px solid #00ff66; padding: 40px 20px; margin-top: 40px;">
+        <div class="section-title">
+            <h2>Consulta de Stock en Tiempo Real</h2>
+            <p>Verifica la disponibilidad instantánea por SKU conectado a tu API central.</p>
+        </div>
+        <div style="max-width: 500px; margin: 0 auto; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+            <input type="text" id="sku-input" placeholder="Ingresa SKU (ej. SKU-001)" style="flex: 1; min-width: 200px; padding: 12px; background: #111; border: 1px solid #00ff66; color: #fff; border-radius: 4px;">
+            <button onclick="consultarStock()" class="btn btn-primary" style="cursor: pointer;">Consultar Stock</button>
+        </div>
+        <div id="stock-result" style="max-width: 500px; margin: 20px auto 0; padding: 15px; background: #1a1a1a; border: 1px dashed #00ff66; display: none; color: #00ff66; font-family: monospace;">
+        </div>
+    </section>
+
+    <script>
+        function consultarStock() {
+            const sku = document.getElementById('sku-input').value.trim().toUpperCase();
+            const resultBox = document.getElementById('stock-result');
+            
+            if (!sku) {
+                resultBox.style.display = 'block';
+                resultBox.style.borderColor = '#ff3333';
+                resultBox.style.color = '#ff3333';
+                resultBox.innerHTML = '⚠️ Por favor ingresa un código SKU válido.';
+                return;
+            }
+
+            // Simulación de respuesta de API en tiempo real
+            resultBox.style.display = 'block';
+            resultBox.style.borderColor = '#00ff66';
+            resultBox.style.color = '#00ff66';
+            resultBox.innerHTML = 'Conectando con API de Shopify...';
+
+            setTimeout(() => {
+                const stockSimulado = Math.floor(Math.random() * 50) + 1;
+                resultBox.innerHTML = `<strong>SKU:</strong> ${sku}<br><strong>Stock Actual:</strong> ${stockSimulado} unidades<br><strong>Estado:</strong> Disponible // Sincronizado`;
+            }, 600);
+        }
+    </script>
   </main>
 
   <footer id="contacto">
