@@ -113,16 +113,14 @@
       </div>
     </div>
   </main>
-  <!-- Cliente de Supabase vía CDN -->
+<!-- Cliente de Supabase vía CDN -->
 <script src="https://cdn.jsdelivr.5net/npm/@supabase/supabase-js@2"></script>
-
 <script>
-  // Inicializa Supabase con las credenciales de tu proyecto
-  const SUPABASE_URL = 'https://gbeuhhnaspsfcldqrfsu.supabase.co'; // Tu URL de Supabase
-  const SUPABASE_ANON_KEY = 'sb_publishable_oU3dBh8r1dDmBC191FMG-g_QY1fk11R'; // Reemplaza esto con tu llave anon/public de Supabase
+  // Inicializa Supabase con tus credenciales correctas
+  const SUPABASE_URL = 'https://gbeuhhnaspsfcldqrfsu.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_oU3dBh8r1dDmBC191FMG-g_QY1fk11R';
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // Función para registrar la suscripción cuando den clic en contratar
   async function contratarPlan(nombrePlan) {
       // 1. Verificamos si hay un usuario autenticado
       const { data: { user }, error: authError } = await supabase.auth.getUser();
@@ -133,7 +131,7 @@
           return;
       }
 
-      // 2. Guardamos la suscripción en la tabla 'subscriptions' que creamos
+      // 2. Guardamos la suscripción en la tabla 'subscriptions'
       const { data, error } = await supabase
           .from('subscriptions')
           .insert([
@@ -146,7 +144,7 @@
 
       if (error) {
           console.error('Error al guardar la suscripción:', error.message);
-          Hub.error('Hubo un error al procesar tu suscripción.');
+          alert('Hubo un error al procesar tu suscripción: ' + error.message);
           return;
       }
 
@@ -154,6 +152,16 @@
   }
 
   // Conectar el botón de la Fase 3 de manera automática
+  document.addEventListener('DOMContentLoaded', () => {
+      const btnFase3 = document.querySelector('.pricing-card.popular .btn-primary');
+      if (btnFase3) {
+          btnFase3.addEventListener('click', (e) => {
+              e.preventDefault();
+              contratarPlan('Fase 3: Acompañamiento');
+          });
+      }
+  });
+</script>
   document.addEventListener('DOMContentLoaded', () => {
       // Buscamos el botón principal de la Fase 3
       const btnFase3 = document.querySelector('.pricing-card.popular .btn-primary');
