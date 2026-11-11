@@ -114,9 +114,9 @@
     </div>
   </main>
 <!-- Cliente de Supabase vía CDN -->
+<!-- Cliente de Supabase vía CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  // Inicializa Supabase con tus credenciales correctas
   const SUPABASE_URL = 'https://gbeuhhnaspsfcldqrfsu.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_oU3dBh8r1dDmBC191FMG-g_QY1fk11R';
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -151,21 +151,16 @@
       alert('¡Suscripción a ' + nombrePlan + ' contratada con éxito!');
   }
 
-  // Conectar el botón de la Fase 3 de manera automática al cargar la página
-  document.addEventListener('DOMContentLoaded', () => {
-      const btnFase3 = document.querySelector('.pricing-card.popular .btn-primary');
-      if (btnFase3) {
-          btnFase3.addEventListener('click', (e) => {
-              e.preventDefault();
-              contratarPlan('Fase 3: Acompañamiento');
-          });
-      }
+  // Capturamos el clic usando el ID directo del botón
+  document.getElementById('btnContratar').addEventListener('click', (e) => {
+      e.preventDefault();
+      contratarPlan('Fase 3: Acompañamiento');
   });
 </script>
   <footer>
     <div class="footer-links">
       <a href="index.html">Inicio</a>
-      <a href="mailto:hola@hextock.com">Contacto</a>
+    <a href="#" id="btnContratar" class="btn btn-primary">Contratar suscripción</a>
     </div>
     <p>&copy; 2026 Hextock. Todos los derechos reservados.</p>
   </footer>
