@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gextok // Plataforma de E-commerce e Inventarios</title>
+  <title>Hextock // Plataforma de E-commerce e Inventarios</title>
   <style>
     :root {
       --bg-color: #ffffff;
@@ -254,52 +254,6 @@
       border-color: var(--text-main);
     }
 
-    .stock-section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 5rem 2rem;
-      text-align: center;
-    }
-
-    .stock-container {
-      max-width: 500px;
-      margin: 0 auto;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .stock-container input {
-      flex: 1;
-      min-width: 220px;
-      padding: 12px 16px;
-      background: #fff;
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-      border-radius: 6px;
-      font-size: 0.95rem;
-      outline: none;
-    }
-
-    .stock-container input:focus {
-      border-color: var(--accent-color);
-      box-shadow: 0 0 0 2px rgba(0, 128, 96, 0.15);
-    }
-
-    #stock-result {
-      max-width: 500px;
-      margin: 20px auto 0;
-      padding: 15px;
-      background: var(--surface-color);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      display: none;
-      text-align: left;
-      font-size: 0.9rem;
-      color: var(--text-main);
-    }
-
     footer {
       background: var(--surface-color);
       border-top: 1px solid var(--border-color);
@@ -338,7 +292,7 @@
 
   <header>
     <nav>
-      <a href="#inicio" class="logo">Gextok.</a>
+      <a href="#inicio" class="logo">Hextock.</a>
       <ul class="nav-links">
         <li><a href="#inicio">Inicio</a></li>
         <li><a href="#soluciones">Servicios</a></li>
@@ -351,10 +305,10 @@
     <section id="inicio" class="hero">
       <span class="badge-hero">E-commerce & Shopify Partner</span>
       <h1>Digitalizamos tu negocio y ponemos orden a tu inventario.</h1>
-      <p>Llevamos tu tienda al mundo digital en Shopify, optimizamos tus existencias y te entregamos un reporte y dashboard en tiempo real con un solo link.</p>
+      <p>Llevamos tu tienda al mundo digital en Shopify, optimizamos tus existencias y te entregamos reportes y asesoría continua mes a mes.</p>
       <div class="hero-actions">
-        <a href="#stock-checker" class="btn btn-primary">Probar Dashboard</a>
-        <a href="#soluciones" class="btn btn-secondary">Conocer Paquetes</a>
+        <a href="#soluciones" class="btn btn-primary">Conocer Paquetes</a>
+        <a href="#contacto" class="btn btn-secondary">Agendar Asesoría</a>
       </div>
     </section>
 
@@ -388,54 +342,17 @@
               <h3>Fase 3: Acompañamiento Mensual</h3>
               <span class="badge">Reportes y Asesoría</span>
             </div>
-            <p>Mantenimiento continuo, carga de productos mes a mes y un dashboard en tiempo real vía link para ver tus métricas claras.</p>
+            <p>Mantenimiento continuo, carga de productos mes a mes y reportes claros para tomar decisiones estratégicas.</p>
             <a href="#contacto" class="btn-card">Ver detalles</a>
           </article>
         </div>
       </div>
     </section>
-
-    <section id="stock-checker" class="stock-section">
-        <div class="section-title" style="margin-bottom: 2rem;">
-            <h2>Dashboard en Tiempo Real</h2>
-            <p>Verifica la disponibilidad instantánea de productos por SKU conectado a tu tienda de Shopify.</p>
-        </div>
-        <div class="stock-container">
-            <input type="text" id="sku-input" placeholder="Ingresa SKU (ej. SKU-001)">
-            <button onclick="consultarStock()" class="btn btn-primary">Consultar Stock</button>
-        </div>
-        <div id="stock-result"></div>
-    </section>
-
-    <script>
-        function consultarStock() {
-            const sku = document.getElementById('sku-input').value.trim().toUpperCase();
-            const resultBox = document.getElementById('stock-result');
-            
-            if (!sku) {
-                resultBox.style.display = 'block';
-                resultBox.style.borderColor = '#ffc5c5';
-                resultBox.style.color = '#d82c0d';
-                resultBox.innerHTML = '⚠️ Por favor ingresa un código SKU válido.';
-                return;
-            }
-
-            resultBox.style.display = 'block';
-            resultBox.style.borderColor = 'var(--border-color)';
-            resultBox.style.color = 'var(--text-main)';
-            resultBox.innerHTML = 'Sincronizando con Shopify...';
-
-            setTimeout(() => {
-                const stockSimulado = Math.floor(Math.random() * 50) + 1;
-                resultBox.innerHTML = `<strong>SKU:</strong> ${sku}<br><strong>Stock Actual:</strong> ${stockSimulado} unidades<br><strong>Estado:</strong> En Línea // Shopify Sincronizado`;
-            }, 600);
-        }
-    </script>
   </main>
 
   <footer id="contacto">
     <div class="footer-content">
-      <p>&copy; 2026 Gextok. Todos los derechos reservados.</p>
+      <p>&copy; 2026 Hextock. Todos los derechos reservados.</p>
       <div class="footer-links">
         <a href="#inicio">Inicio</a>
         <a href="#soluciones">Servicios</a>
