@@ -107,7 +107,9 @@
                 </ul>
                 <!-- Único botón real con el ID correcto para conectar a Supabase -->
               
-               <button type="button" id="btnContratar" class="btn btn-primary">Contratar suscripción</button>
+<a href="#" id="btnContratar" class="btn btn-primary">Contratar suscripción</a>
+
+                
             </div>
         </div>
     </main>
@@ -119,41 +121,54 @@
         <p>&copy; 2026 Hextock. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Cliente de Supabase vía CDN y lógica de conexión -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>    
-    <script>
-        const SUPABASE_URL = 'https://gbeuhhnaspsfcldqrfsu.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_oU3dBh8r1dDmBC191FMG-g_QY1fk11R';
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+<!-- Cliente de Supabase vía CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    // Inicialización de Supabase con tus credenciales
+    const SUPABASE_URL = 'https://gbeuhhnaspsfcldqrfsu.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_oU3dBh8r1dDmBC191FMG-g_QY1fk11R';
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        async function contratarPlan(nombrePlan) {
-            const { data: { user }, error: authError } = await supabase.auth.getUser();
+    // Función principal para contratar
+    window.contratarPlanFase3 = async function(e) {
+        if (e) e.preventDefault();
 
-            if (authError || !user) {
-                alert('Por favor, inicia sesión para contratar un plan.');
-                window.location.href = 'Login.html';
-                return;
-            }
+        // 1. Verificamos si hay sesión activa en Supabase
+        const { data: { user }, error: authError } = await supabase.auth.getUser();
 
-            const { data, error } = await supabase
-                .from('subscriptions')
-                .insert([
-                    { user_id: user.id, plan_name: nombrePlan, status: 'active' }
-                ]);
-
-            if (error) {
-                console.error('Error al guardar la suscripción:', error.message);
-                alert('Hubo un error al procesar tu suscripción: ' + error.message);
-                return;
-            }
-
-            alert('¡Suscripción a ' + nombrePlan + ' contratada con éxito!');
+        if (authError || !user) {
+            alert('Por favor, inicia sesión para contratar un plan.');
+            window.location.href = 'Login.html';
+            return;
         }
 
-        document.getElementById('btnContratar').addEventListener('click', (e) => {
-            e.preventDefault();
-            contratarPlan('Fase 3: Acompañamiento');
-        });
-    </script>
+        // 2. Insertamos la suscripción en la tabla 'subscriptions'
+        const { data, error } = await supabase
+            .from('subscriptions')
+            .insert([
+                { 
+                    user_id: user.id, 
+                    plan_name: 'Fase 3: Acompañamiento', 
+                    status: 'active' 
+                }
+            ]);
+
+        if (error) {
+            console.error('Error al guardar en Supabase:', error.message);
+            alert('Error al procesar: ' + error.message);
+            return;
+        }
+
+        alert('¡Suscripción a Fase 3: Acompañamiento contratada con éxito!');
+    };
+
+    // Vinculamos el evento de forma segura cuando cargue la página
+    document.addEventListener('DOMContentLoaded', () => {
+        const boton = document.getElementById('btnContratar');
+        if (boton) {
+            boton.addEventListener('click', window.contratarPlanFase3);
+        }
+    });
+</script>
 </body>
 </html>
