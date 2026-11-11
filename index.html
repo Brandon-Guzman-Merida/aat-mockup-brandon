@@ -81,10 +81,24 @@
       padding: 0.6rem 1.2rem;
       border-radius: 6px;
       font-weight: 500;
+      cursor: pointer;
     }
 
     .nav-btn:hover {
       background: var(--accent-hover) !important;
+    }
+
+    /* Fondo animado para la sección Hero */
+    @keyframes gradient-animation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     .hero {
@@ -92,6 +106,12 @@
       margin: 0 auto;
       padding: 5rem 2rem 4rem 2rem;
       text-align: center;
+      background: linear-gradient(-45deg, #f9f9f9, #e4f5ed, #ffffff, #f9f9f9);
+      background-size: 400% 400%;
+      animation: gradient-animation 15s ease infinite;
+      border-radius: 20px;
+      margin-top: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
     }
 
     .badge-hero {
@@ -157,7 +177,7 @@
     }
 
     .btn-secondary:hover {
-      background: var(--surface-color);
+      background: #f1f1f1;
     }
 
     .features {
@@ -165,6 +185,7 @@
       border-top: 1px solid var(--border-color);
       border-bottom: 1px solid var(--border-color);
       padding: 5rem 2rem;
+      margin-top: 3rem;
     }
 
     .features-inner {
@@ -296,19 +317,22 @@
       <ul class="nav-links">
         <li><a href="#inicio">Inicio</a></li>
         <li><a href="#soluciones">Servicios</a></li>
-        <li><a href="#contacto" class="btn nav-btn">Agendar Asesoría</a></li>
+        <!-- Botón del menú ahora abre tu correo -->
+        <li><a href="mailto:hola@hextock.com" class="btn nav-btn">Agendar Asesoría</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
+    <!-- Sección con fondo animado -->
     <section id="inicio" class="hero">
       <span class="badge-hero">E-commerce & Shopify Partner</span>
       <h1>Digitalizamos tu negocio y ponemos orden a tu inventario.</h1>
       <p>Llevamos tu tienda al mundo digital en Shopify, optimizamos tus existencias y te entregamos reportes y asesoría continua mes a mes.</p>
       <div class="hero-actions">
         <a href="#soluciones" class="btn btn-primary">Conocer Paquetes</a>
-        <a href="#contacto" class="btn btn-secondary">Agendar Asesoría</a>
+        <!-- Botón del hero ahora abre tu correo -->
+        <a href="mailto:hola@hextock.com" class="btn btn-secondary">Agendar Asesoría</a>
       </div>
     </section>
 
@@ -333,7 +357,7 @@
               <h3>Fase 2: Rescate de Inventarios</h3>
               <span class="badge">Adiós al desorden</span>
             </div>
-            <p>Ordenamos bases de datos caóticas y conectamos tus canales para evitar sobreventas y quiebres de stock innecesarios.</p>
+            <p>Ordenamos bases de datos caóticas y conectamos tus canales para evitar sobreventas y quiebras de stock innecesarios.</p>
             <a href="#contacto" class="btn-card">Ver detalles</a>
           </article>
 
