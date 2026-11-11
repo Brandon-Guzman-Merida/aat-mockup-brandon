@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planes y Servicios // Hextock</title>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --surface-color: #f9f9f9;
+      --card-bg: #ffffff;
+      --text-main: #202223;
+      --text-muted: #6d7175;
+      --accent-color: #008060;
+      --accent-hover: #006e52;
+      --border-color: #e1e3e5;
+      --popular-bg: #e4f5ed;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--surface-color);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .main-container {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-title h1 {
+      font-size: 2.5rem;
+      color: var(--text-main);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.5px;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .pricing-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .pricing-card.popular {
+      border-color: var(--accent-color);
+      box-shadow: 0 8px 24px rgba(0, 128, 96, 0.08);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: var(--popular-bg);
+      color: var(--accent-color);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .plan-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .plan-description {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    .price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 2rem;
+    }
+
+    .price span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .features-list {
+      list-style: none;
+      margin-bottom: 3rem;
+      flex: 1;
+    }
+
+    .features-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .features-list li::before {
+      content: '✓';
+      color: var(--accent-color);
+      font-weight: 700;
+    }
+
+    .btn {
+      display: inline-block;
+      text-align: center;
+      padding: 0.85rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      color: var(--text-main);
+    }
+
+    .pricing-card.popular .btn-primary {
+      background: var(--accent-color);
+      color: #ffffff;
+      border-color: var(--accent-color);
+    }
+
+    .pricing-card.popular .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html" class="logo">Hextock.</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="mailto:hola@hextock.com">Soporte</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main-container">
+    <div class="section-title">
+      <h1>Paquetes de Acompañamiento</h1>
+      <p>Elige la fase que mejor se adapte al momento actual de tu negocio.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Fase 1 -->
+      <div class="pricing-card">
+        <h2 class="plan-name">Fase 1: Migración</h2>
+        <p class="plan-description">Para negocios que aún operan de forma física o tradicional y quieren dar el salto al comercio en línea.</p>
+        <div class="price">$499 <span>/ pago único</span></div>
+        <ul class="features-list">
+          <li>Configuración inicial de Shopify</li>
+          <li>Carga y organización de catálogo</li>
+          <li>Conexión de pasarelas de pago</li>
+          <li>Capacitación básica del sistema</li>
+        </ul>
+        <a href="mailto:hola@hextock.com" class="btn">Solicitar Paquete</a>
+      </div>
+
+      <!-- Fase 2 -->
+      <div class="pricing-card popular">
+        <span class="popular-badge">Recomendado</span>
+        <h2 class="plan-name">Fase 2: Rescate</h2>
+        <p class="plan-description">Ideal para quienes ya tienen e-commerce pero el control de su inventario y operaciones es un caos.</p>
+        <div class="price">$299 <span>/ pago único</span></div>
+        <ul class="features-list">
+          <li>Auditoría y orden de bases de datos</li>
+          <li>Sincronización multi-almacén</li>
+          <li>Eliminación de sobreventas</li>
+          <li>Optimización de procesos en Shopify</li>
+        </ul>
+        <a href="mailto:hola@hextock.com" class="btn btn-primary">Solicitar Paquete</a>
+      </div>
+
+      <!-- Fase 3 -->
+      <div class="pricing-card">
+        <h2 class="plan-name">Fase 3: Acompañamiento</h2>
+        <p class="plan-description">Soporte continuo mes a mes. Enfocado en la delegación operativa y decisiones estratégicas basadas en datos.</p>
+        <div class="price">$199 <span>/ mes</span></div>
+        <ul class="features-list">
+          <li>Mantenimiento continuo de tienda</li>
+          <li>Carga recurrente de productos</li>
+          <li>Reportes estratégicos de inventario</li>
+          <li>Dashboard en tiempo real vía link</li>
+        </ul>
+        <a href="mailto:hola@hextock.com" class="btn">Contratar Suscripción</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="index.html">Inicio</a>
+      <a href="mailto:hola@hextock.com">Contacto</a>
+    </div>
+    <p>&copy; 2026 Hextock. Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>
