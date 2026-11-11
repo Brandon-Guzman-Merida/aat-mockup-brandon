@@ -114,7 +114,7 @@
     </div>
   </main>
 <!-- Cliente de Supabase vía CDN -->
-<script src="https://cdn.jsdelivr.5net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   // Inicializa Supabase con tus credenciales correctas
   const SUPABASE_URL = 'https://gbeuhhnaspsfcldqrfsu.supabase.co';
@@ -151,19 +151,8 @@
       alert('¡Suscripción a ' + nombrePlan + ' contratada con éxito!');
   }
 
-  // Conectar el botón de la Fase 3 de manera automática
+  // Conectar el botón de la Fase 3 de manera automática al cargar la página
   document.addEventListener('DOMContentLoaded', () => {
-      const btnFase3 = document.querySelector('.pricing-card.popular .btn-primary');
-      if (btnFase3) {
-          btnFase3.addEventListener('click', (e) => {
-              e.preventDefault();
-              contratarPlan('Fase 3: Acompañamiento');
-          });
-      }
-  });
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-      // Buscamos el botón principal de la Fase 3
       const btnFase3 = document.querySelector('.pricing-card.popular .btn-primary');
       if (btnFase3) {
           btnFase3.addEventListener('click', (e) => {
