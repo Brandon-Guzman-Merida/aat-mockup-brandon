@@ -82,14 +82,14 @@
                 <span class="logo-icon"><i class="fa-solid fa-cube"></i></span>
                 Hextock.
             </a>
-         <ul class="nav-links">
-    <li><a href="index.html">Inicio</a></li>
-    <li><a href="mailto:hola@hextock.com">Soporte</a></li>
-    <li id="nav-auth-item" style="display: none; align-items: center; gap: 0.75rem;">
-        <span id="nav-user-label" style="font-size: 0.85rem; color: var(--text-muted);"></span>
-        <button type="button" id="btn-logout" class="btn" style="width: auto; padding: 0.4rem 0.85rem; font-size: 0.85rem;">Cerrar sesión</button>
-    </li>
-</ul>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="mailto:hola@hextock.com">Soporte</a></li>
+                <li id="nav-auth-item" style="display: none; align-items: center; gap: 0.75rem;">
+                    <span id="nav-user-label" style="font-size: 0.85rem; color: var(--text-muted);"></span>
+                    <button type="button" id="btn-logout" class="btn" style="width: auto; padding: 0.4rem 0.85rem; font-size: 0.85rem;">Cerrar sesión</button>
+                </li>
+            </ul>
         </nav>
     </header>
 
@@ -182,31 +182,32 @@
                 setTimeout(() => toast.remove(), 300);
             }, 3500);
         }
+
         async function updateNavbarAuth() {
-    const authItem = document.getElementById('nav-auth-item');
-    const userLabel = document.getElementById('nav-user-label');
-    if (!window.supabaseClient || !authItem || !userLabel) return;
+            const authItem = document.getElementById('nav-auth-item');
+            const userLabel = document.getElementById('nav-user-label');
+            if (!window.supabaseClient || !authItem || !userLabel) return;
 
-    const { data: { user } } = await window.supabaseClient.auth.getUser();
-    if (user) {
-        const displayIdentity = user.user_metadata?.full_name || user.email || 'Usuario activo';
-        userLabel.textContent = displayIdentity;
-        authItem.style.display = 'flex';
-    } else {
-        authItem.style.display = 'none';
-    }
-}
+            const { data: { user } } = await window.supabaseClient.auth.getUser();
+            if (user) {
+                const displayIdentity = user.user_metadata?.full_name || user.email || 'Usuario activo';
+                userLabel.textContent = displayIdentity;
+                authItem.style.display = 'flex';
+            } else {
+                authItem.style.display = 'none';
+            }
+        }
 
-async function handleLogout() {
-    if (!window.supabaseClient) return;
-    const { error } = await window.supabaseClient.auth.signOut();
-    if (error) {
-        showToast('No se pudo cerrar sesión: ' + error.message, 'error');
-        return;
-    }
-    showToast('Sesión cerrada.', 'info');
-    updateNavbarAuth();
-}
+        async function handleLogout() {
+            if (!window.supabaseClient) return;
+            const { error } = await window.supabaseClient.auth.signOut();
+            if (error) {
+                showToast('No se pudo cerrar sesión: ' + error.message, 'error');
+                return;
+            }
+            showToast('Sesión cerrada.', 'info');
+            updateNavbarAuth();
+        }
 
         function initSupabase() {
             try {
@@ -270,10 +271,16 @@ async function handleLogout() {
 
         document.addEventListener('DOMContentLoaded', () => {
             initSupabase();
+            updateNavbarAuth();
 
             const btn = document.getElementById('btnContratar');
             if (btn) {
                 btn.addEventListener('click', window.contratarPlanFase3);
+            }
+
+            const logoutBtn = document.getElementById('btn-logout');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', handleLogout);
             }
         });
     </script>
