@@ -385,7 +385,11 @@
                 ]);
 
             if (error) {
-                showToast('Hubo un error al procesar tu suscripción: ' + error.message, 'error');
+                if (error.code === '23505') {
+                    showToast('Ya tienes una suscripción registrada con esta cuenta.', 'warning');
+                } else {
+                    showToast('Hubo un error al procesar tu suscripción: ' + error.message, 'error');
+                }
             } else {
                 closePlanModal();
                 showToast(`¡Suscripción a ${planToContract} contratada con éxito!`, 'success');
