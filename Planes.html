@@ -17,12 +17,10 @@
             --accent-hover: #006e52;
             --border-color: #e1e3e5;
             --popular-bg: #e4f5ed;
-            --console-bg: #1e1e2e;
-            --console-text: #a6adc8;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, sans-serif; }
-        body { background-color: var(--surface-color); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; padding-bottom: 240px; }
-        
+        body { background-color: var(--surface-color); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; }
+
         /* Header & Nav */
         header { background: rgba(255, 255, 255, 0.95); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
         nav { max-width: 1200px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
@@ -31,34 +29,40 @@
         .nav-links { display: flex; list-style: none; gap: 2rem; align-items: center; }
         .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.95rem; transition: color 0.2s; }
         .nav-links a:hover { color: var(--text-main); }
-        
+
         /* Layout Main */
         .main-container { max-width: 1200px; margin: 3rem auto; padding: 0 2rem; flex: 1; }
         .section-title { text-align: center; margin-bottom: 3.5rem; }
         .section-title h1 { font-size: 2.5rem; color: var(--text-main); margin-bottom: 0.75rem; letter-spacing: -0.5px; }
         .section-title p { color: var(--text-muted); font-size: 1.15rem; }
-        
+
         /* Pricing Grid */
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; align-items: stretch; }
         .pricing-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 3rem 2.5rem; display: flex; flex-direction: column; height: 100%; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
         .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.05); }
         .pricing-card.popular { border-color: var(--accent-color); box-shadow: 0 8px 24px rgba(0, 128, 96, 0.12); }
         .popular-badge { position: absolute; top: 1.25rem; right: 1.25rem; background: var(--popular-bg); color: var(--accent-color); font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
-        
+
         .plan-name { font-size: 1.25rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.5rem; }
         .plan-description { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.5; }
         .price { font-size: 2.2rem; font-weight: 700; color: var(--text-main); margin-bottom: 2rem; }
         .price span { font-size: 0.9rem; font-weight: 400; color: var(--text-muted); display: block; margin-top: 0.5rem; }
-        
+
         .features-list { list-style: none; margin-bottom: 3rem; flex: 1; }
         .features-list li { display: flex; align-items: center; gap: 0.75rem; color: var(--text-main); font-size: 0.95rem; margin-bottom: 1rem; }
         .features-list li i { color: var(--accent-color); font-size: 0.9rem; }
-        
+
         /* Buttons */
         .btn { display: inline-block; width: 100%; text-align: center; padding: 0.85rem 1.5rem; font-size: 1rem; font-weight: 500; border-radius: 6px; cursor: pointer; text-decoration: none; border: 1px solid var(--border-color); background: #ffffff; color: var(--text-main); transition: all 0.2s; }
         .btn:hover { background: #f4f5f7; }
         .btn-primary { background: var(--accent-color); color: #ffffff; border-color: var(--accent-color); }
         .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+
+        /* Footer */
+        footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; background: #ffffff; border-top: 1px solid var(--border-color); }
+        .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 0.75rem; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-main); }
 
         /* Custom Notification Toast */
         .toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
@@ -66,8 +70,7 @@
         .toast.error { border-left-color: #f38ba8; }
         .toast.warning { border-left-color: #fab387; }
         @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-
-      
+    </style>
 </head>
 <body>
 
@@ -134,7 +137,6 @@
                     <li><i class="fa-solid fa-check"></i> Reportes estratégicos de inventario</li>
                     <li><i class="fa-solid fa-check"></i> Dashboard en tiempo real vía link</li>
                 </ul>
-                <!-- Target Button connected to Supabase -->
                 <a href="#" id="btnContratar" class="btn btn-primary">Contratar suscripción</a>
             </div>
         </div>
@@ -149,19 +151,15 @@
 
     <!-- Official Supabase JS v2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
+
     <script>
-        // Supabase Project Credentials
         const SUPABASE_URL = 'https://gbeuhhnaspsfcldqrfsu.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_oU3dBh8r1dDmBC191FMG-g_QY1fk11R';
 
-        // Declare supabase using 'var' or check global window scope to avoid duplicate 'const/let' declaration errors
         if (typeof window.supabaseClient === 'undefined') {
             window.supabaseClient = null;
         }
-        let mockUserActive = false;
 
-        // Custom Notification Function replacing standard alert
         function showToast(message, type = 'info') {
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
@@ -181,83 +179,25 @@
             }, 3500);
         }
 
-        // Logger helper
-        function logMsg(msg, type = 'info') {
-            const logsContainer = document.getElementById('consoleLogs');
-            if (!logsContainer) return;
-            const entry = document.createElement('div');
-            entry.className = 'log-entry';
-            const time = new Date().toLocaleTimeString();
-            entry.innerHTML = `<span class="log-time">[${time}]</span> <span class="log-${type}">${msg}</span>`;
-            logsContainer.appendChild(entry);
-            logsContainer.scrollTop = logsContainer.scrollHeight;
-        }
-
-        function clearLogs() {
-            const logsContainer = document.getElementById('consoleLogs');
-            if (logsContainer) logsContainer.innerHTML = '';
-            logMsg('Consola reiniciada.', 'info');
-        }
-
-        function toggleSimulatedAuth() {
-            mockUserActive = !mockUserActive;
-            const btnState = document.getElementById('simStatusState');
-            const dispUser = document.getElementById('dispUser');
-
-            if (mockUserActive) {
-                if (btnState) { btnState.innerText = 'ON'; btnState.style.color = '#a6e3a1'; }
-                if (dispUser) { dispUser.innerHTML = `<i class="fa-solid fa-circle-check" style="color:#a6e3a1"></i> Logueado: user_mock_9921`; dispUser.style.color = '#a6e3a1'; }
-                logMsg('MODO SIMULACIÓN: Usuario autenticado activado (ID: user_mock_9921)', 'warn');
-                showToast('Modo de prueba: Usuario simulado logueado', 'success');
-            } else {
-                if (btnState) { btnState.innerText = 'OFF'; btnState.style.color = '#f38ba8'; }
-                if (dispUser) { dispUser.innerHTML = `<i class="fa-solid fa-circle-user"></i> No autenticado (null)`; dispUser.style.color = '#f9e2af'; }
-                logMsg('MODO SIMULACIÓN: Usuario deslogueado (Sesión nula)', 'info');
-                showToast('Modo de prueba: Usuario deslogueado', 'warning');
-            }
-        }
-
-        // Initializing Supabase client safely onto window scope
         function initSupabase() {
             try {
                 if (window.supabase && typeof window.supabase.createClient === 'function') {
                     if (!window.supabaseClient) {
                         window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
                     }
-                    logMsg('Supabase JS v2 inicializado correctamente.', 'success');
-                    checkInitialAuth();
                 } else {
-                    logMsg('No se pudo cargar la librería Supabase desde CDN.', 'error');
+                    showToast('No se pudo cargar la librería Supabase desde CDN.', 'error');
                 }
             } catch (err) {
-                logMsg('Error inicializando Supabase: ' + err.message, 'error');
+                showToast('Error inicializando Supabase: ' + err.message, 'error');
             }
         }
 
-        async function checkInitialAuth() {
-            if (!window.supabaseClient) return;
-            try {
-                const { data: { user } } = await window.supabaseClient.auth.getUser();
-                const dispUser = document.getElementById('dispUser');
-                if (user && dispUser) {
-                    dispUser.innerHTML = `<i class="fa-solid fa-circle-check" style="color:#a6e3a1"></i> Real: ${user.email || user.id}`;
-                    logMsg(`Sesión real detectada en Supabase: ${user.id}`, 'success');
-                } else {
-                    logMsg('Supabase auth.getUser(): No hay sesión activa en el navegador.', 'info');
-                }
-            } catch (e) {
-                logMsg('Verificación inicial de usuario finalizada: sin sesión activa.', 'info');
-            }
-        }
-
-        // Primary Subscription Handler
         window.contratarPlanFase3 = async function(e) {
             if (e) e.preventDefault();
-            logMsg('>>> Botón "Contratar suscripción" clickeado.', 'info');
 
             let currentUser = null;
 
-            // Check real Supabase user first
             if (window.supabaseClient) {
                 try {
                     const { data: { user }, error: authError } = await window.supabaseClient.auth.getUser();
@@ -265,75 +205,46 @@
                         currentUser = user;
                     }
                 } catch (err) {
-                    logMsg('Evaluando estado de sesión...', 'info');
+                    console.error('Error verificando sesión:', err);
                 }
             }
 
-            // Fallback to mock session toggle if active
-            if (!currentUser && mockUserActive) {
-                currentUser = { id: 'mock-user-uuid-9921-hextock', email: 'demo@hextock.com' };
-            }
-
-            // 1. Unauthenticated workflow: Redirect to Login.html
             if (!currentUser) {
-                logMsg('Resultado: Usuario NO autenticado. Ejecutando redirección a Login.html', 'warn');
                 showToast('Por favor, inicia sesión para contratar un plan.', 'warning');
-                
                 setTimeout(() => {
-                    logMsg('Redirigiendo -> window.location.href = "Login.html"', 'error');
                     try {
-                        // Build full absolute URL to avoid location assignment syntax errors in frames
                         const targetUrl = new URL('Login.html', window.location.href).href;
                         window.location.href = targetUrl;
                     } catch (navErr) {
-                        logMsg('Navegación fallback ejecutada: Login.html', 'warn');
                         window.location.assign('Login.html');
                     }
                 }, 1200);
                 return;
             }
 
-            // 2. Authenticated workflow: Insert subscription into Supabase
-            logMsg(`Usuario autenticado (${currentUser.id}). Enviando solicitud de inserción a 'subscriptions'...`, 'info');
+            const { error } = await window.supabaseClient
+                .from('subscriptions')
+                .insert([
+                    {
+                        user_id: currentUser.id,
+                        plan_name: 'Fase 3: Acompañamiento',
+                        status: 'active'
+                    }
+                ]);
 
-            if (window.supabaseClient && !mockUserActive) {
-                // Real DB insertion attempt
-                const { data, error } = await window.supabaseClient
-                    .from('subscriptions')
-                    .insert([
-                        { 
-                            user_id: currentUser.id, 
-                            plan_name: 'Fase 3: Acompañamiento', 
-                            status: 'active' 
-                        }
-                    ]);
-
-                if (error) {
-                    logMsg('Error de Supabase DB: ' + error.message, 'error');
-                    showToast('Hubo un error al procesar tu suscripción: ' + error.message, 'error');
-                } else {
-                    logMsg('¡Inserción exitosa en Supabase! Registro guardado en la tabla subscriptions.', 'success');
-                    showToast('¡Suscripción a Fase 3: Acompañamiento contratada con éxito!', 'success');
-                }
+            if (error) {
+                showToast('Hubo un error al procesar tu suscripción: ' + error.message, 'error');
             } else {
-                // Simulated DB insertion response
-                setTimeout(() => {
-                    logMsg('[SIMULACIÓN DB] INSERT INTO subscriptions (user_id, plan_name, status) VALUES ("' + currentUser.id + '", "Fase 3: Acompañamiento", "active") -> 200 OK', 'success');
-                    showToast('¡Suscripción a Fase 3: Acompañamiento contratada con éxito! (Modo Prueba)', 'success');
-                }, 600);
+                showToast('¡Suscripción a Fase 3: Acompañamiento contratada con éxito!', 'success');
             }
         };
 
-        // Attach listener securely on DOM load
         document.addEventListener('DOMContentLoaded', () => {
             initSupabase();
 
             const btn = document.getElementById('btnContratar');
             if (btn) {
                 btn.addEventListener('click', window.contratarPlanFase3);
-                logMsg('EventListener enlazado correctamente al botón #btnContratar.', 'info');
-            } else {
-                logMsg('CRÍTICO: No se encontró el botón con ID #btnContratar.', 'error');
             }
         });
     </script>
