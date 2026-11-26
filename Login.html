@@ -127,7 +127,8 @@
       background-color: var(--accent-hover);
     }
 
-    .btn-primary:disabled {
+    .btn-primary:disabled,
+    .btn-secondary:disabled {
       opacity: 0.7;
       cursor: not-allowed;
     }
@@ -267,10 +268,15 @@
       errorBox.style.display = 'block';
     }
 
-    function redirectToPlanes() {
+    function getPlanesRedirectUrl() {
       const params = new URLSearchParams(window.location.search);
       const plan = params.get('plan');
-      window.location.href = plan ? `Planes.html?plan=${encodeURIComponent(plan)}` : 'Planes.html';
+      const relativeTarget = plan ? `Planes.html?plan=${encodeURIComponent(plan)}` : 'Planes.html';
+      return new URL(relativeTarget, window.location.href).href;
+    }
+
+    function redirectToPlanes() {
+      window.location.href = getPlanesRedirectUrl();
     }
 
     (async () => {
@@ -306,15 +312,18 @@
 
     googleBtn.addEventListener('click', async () => {
       errorBox.style.display = 'none';
+      googleBtn.disabled = true;
+
       const { error } = await supabaseClient.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/Planes.html`
+          redirectTo: getPlanesRedirectUrl()
         }
       });
 
       if (error) {
         showError('No se pudo iniciar con Google: ' + error.message);
+        googleBtn.disabled = false;
       }
     });
   </script>
