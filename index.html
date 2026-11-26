@@ -255,24 +255,156 @@
       margin-bottom: 1.5rem;
     }
 
+    .card-actions {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
     .btn-card {
+      flex: 1 1 130px;
       display: inline-block;
       text-align: center;
       background: var(--surface-color);
       border: 1px solid var(--border-color);
       color: var(--text-main);
-      padding: 0.6rem 1rem;
+      padding: 0.65rem 1rem;
       border-radius: 6px;
       font-size: 0.85rem;
       font-weight: 500;
       text-decoration: none;
-      transition: background 0.2s;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
     }
 
     .btn-card:hover {
       background: var(--text-main);
       color: #fff;
       border-color: var(--text-main);
+    }
+
+    .btn-card-contratar {
+      background: var(--accent-color);
+      color: #fff;
+      border-color: var(--accent-color);
+    }
+
+    .btn-card-contratar:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+      color: #fff;
+    }
+
+    /* Modal de detalles */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      z-index: 9999;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #ffffff;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      max-width: 540px;
+      width: 100%;
+      padding: 2rem;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: #fff;
+      color: var(--text-muted);
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .modal-close:hover {
+      color: var(--text-main);
+      background: var(--surface-color);
+    }
+
+    .modal-tag {
+      display: inline-block;
+      background: #e4f5ed;
+      color: var(--accent-color);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .modal-title {
+      font-size: 1.55rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .modal-price {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      margin-bottom: 0.9rem;
+    }
+
+    .modal-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .modal-list {
+      list-style: none;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      font-size: 0.92rem;
+    }
+
+    .modal-list li {
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .modal-list li::before {
+      content: "✓";
+      color: var(--accent-color);
+      font-weight: 700;
+      position: absolute;
+      left: 0;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .modal-actions .btn {
+      flex: 1 1 170px;
+      text-align: center;
     }
 
     footer {
@@ -317,7 +449,7 @@
       <ul class="nav-links">
         <li><a href="#inicio">Inicio</a></li>
         <li><a href="#soluciones">Servicios</a></li>
-        <!-- Botón del menú ahora abre tu correo -->
+        <li><a href="Planes.html">Planes</a></li>
         <li><a href="Registro.html" class="btn nav-btn">Agendar Asesoría</a></li>
       </ul>
     </nav>
@@ -330,8 +462,7 @@
       <h1>Digitalizamos tu negocio y ponemos orden a tu inventario.</h1>
       <p>Llevamos tu tienda al mundo digital en Shopify, optimizamos tus existencias y te entregamos reportes y asesoría continua mes a mes.</p>
       <div class="hero-actions">
-        <a href="Registro.html">Conocer Paquetes</a>
-        <!-- Botón del hero ahora abre tu correo -->
+        <a href="Planes.html" class="btn btn-primary">Conocer Paquetes</a>
         <a href="Registro.html" class="btn btn-secondary">Agendar asesoría</a>
       </div>
     </section>
@@ -349,7 +480,10 @@
               <span class="badge">E-commerce desde cero</span>
             </div>
             <p>Pasamos tu negocio físico al mundo digital. Configuramos tu tienda, subimos tus productos y dejamos todo listo para operar.</p>
-            <a href="#contacto" class="btn-card">Ver detalles</a>
+            <div class="card-actions">
+              <button type="button" class="btn-card js-ver-detalles" data-plan="Fase 1: Migración">Ver detalles</button>
+              <a href="Planes.html?plan=Fase%201%3A%20Migraci%C3%B3n" class="btn-card btn-card-contratar">Contratar</a>
+            </div>
           </article>
 
           <article class="card">
@@ -358,7 +492,10 @@
               <span class="badge">Adiós al desorden</span>
             </div>
             <p>Ordenamos bases de datos caóticas y conectamos tus canales para evitar sobreventas y quiebras de stock innecesarios.</p>
-            <a href="#contacto" class="btn-card">Ver detalles</a>
+            <div class="card-actions">
+              <button type="button" class="btn-card js-ver-detalles" data-plan="Fase 2: Rescate">Ver detalles</button>
+              <a href="Planes.html?plan=Fase%202%3A%20Rescate" class="btn-card btn-card-contratar">Contratar</a>
+            </div>
           </article>
 
           <article class="card">
@@ -367,12 +504,31 @@
               <span class="badge">Reportes y Asesoría</span>
             </div>
             <p>Mantenimiento continuo, carga de productos mes a mes y reportes claros para tomar decisiones estratégicas.</p>
-            <a href="#contacto" class="btn-card">Ver detalles</a>
+            <div class="card-actions">
+              <button type="button" class="btn-card js-ver-detalles" data-plan="Fase 3: Acompañamiento">Ver detalles</button>
+              <a href="Planes.html?plan=Fase%203%3A%20Acompa%C3%B1amiento" class="btn-card btn-card-contratar">Contratar</a>
+            </div>
           </article>
         </div>
       </div>
     </section>
   </main>
+
+  <!-- Modal de detalles de fase -->
+  <div id="planDetailModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button type="button" id="closePlanModal" class="modal-close" aria-label="Cerrar">✕</button>
+      <span id="modalTag" class="modal-tag">E-COMMERCE</span>
+      <h3 id="modalTitle" class="modal-title">Fase 3: Acompañamiento</h3>
+      <p id="modalPrice" class="modal-price">$199 / mes</p>
+      <p id="modalDesc" class="modal-desc"></p>
+      <ul id="modalList" class="modal-list"></ul>
+      <div class="modal-actions">
+        <a id="modalContratarBtn" href="Planes.html" class="btn btn-primary">Contratar suscripción</a>
+        <button type="button" id="modalCerrarBtn" class="btn btn-secondary">Seguir viendo</button>
+      </div>
+    </div>
+  </div>
 
   <footer id="contacto">
     <div class="footer-content">
@@ -385,5 +541,84 @@
     </div>
   </footer>
 
+  <script>
+    (function () {
+      const FASES_INFO = {
+        'Fase 1: Migración': {
+          tag: 'E-commerce desde cero',
+          price: '$499 primer pago (acompañamiento a $200/mes)',
+          desc: 'Dejamos tu tienda en Shopify configurada, con catálogo cargado, pagos activos y equipo capacitado para operar sin fricciones.',
+          items: [
+            'Configuración inicial de Shopify, impuestos, envíos y dominio',
+            'Carga y organización inicial de productos y variantes',
+            'Conexión y prueba de pasarelas de pago',
+            'Capacitación operativa y acompañamiento continuo a $200/mes'
+          ]
+        },
+        'Fase 2: Rescate': {
+          tag: 'Adiós al desorden',
+          price: '$299 pago único',
+          desc: 'Diagnosticamos y ordenamos tus bases de datos e inventarios para eliminar sobreventas y quiebres de stock inesperados.',
+          items: [
+            'Auditoría y limpieza de inventario, SKUs y bases de datos',
+            'Sincronización y orden multi-almacén',
+            'Reducción de sobreventas y cruces erróneos de stock',
+            'Optimización de flujos y procesos en Shopify'
+          ]
+        },
+        'Fase 3: Acompañamiento': {
+          tag: 'Reportes y Asesoría',
+          price: '$199 / mes',
+          desc: 'Apoyo mensual recurrente para mantener tu tienda al día, cargar productos y tomar decisiones con reportes claros.',
+          items: [
+            'Mantenimiento continuo de tu tienda en Shopify',
+            'Carga recurrente de productos y actualizaciones de catálogo',
+            'Reportes estratégicos de inventario y rotación',
+            'Dashboard en tiempo real vía enlace compartido'
+          ]
+        }
+      };
+
+      const modal = document.getElementById('planDetailModal');
+      const closeBtn = document.getElementById('closePlanModal');
+      const seguirBtn = document.getElementById('modalCerrarBtn');
+      const contratarBtn = document.getElementById('modalContratarBtn');
+
+      function openModal(planKey) {
+        const data = FASES_INFO[planKey] || FASES_INFO['Fase 3: Acompañamiento'];
+        document.getElementById('modalTag').textContent = data.tag;
+        document.getElementById('modalTitle').textContent = planKey;
+        document.getElementById('modalPrice').textContent = data.price;
+        document.getElementById('modalDesc').textContent = data.desc;
+        document.getElementById('modalList').innerHTML = data.items
+          .map(item => `<li>${item}</li>`)
+          .join('');
+        contratarBtn.href = `Planes.html?plan=${encodeURIComponent(planKey)}`;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeModal() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+
+      document.querySelectorAll('.js-ver-detalles').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const planKey = btn.getAttribute('data-plan');
+          openModal(planKey);
+        });
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      seguirBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+      });
+    })();
+  </script>
 </body>
 </html>
