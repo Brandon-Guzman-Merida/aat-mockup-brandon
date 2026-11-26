@@ -48,15 +48,36 @@
         .price { font-size: 2.2rem; font-weight: 700; color: var(--text-main); margin-bottom: 2rem; }
         .price span { font-size: 0.9rem; font-weight: 400; color: var(--text-muted); display: block; margin-top: 0.5rem; }
 
-        .features-list { list-style: none; margin-bottom: 3rem; flex: 1; }
+        .features-list { list-style: none; margin-bottom: 2rem; flex: 1; }
         .features-list li { display: flex; align-items: center; gap: 0.75rem; color: var(--text-main); font-size: 0.95rem; margin-bottom: 1rem; }
         .features-list li i { color: var(--accent-color); font-size: 0.9rem; }
+
+        .card-actions { display: flex; flex-direction: column; gap: 0.75rem; margin-top: auto; }
 
         /* Buttons */
         .btn { display: inline-block; width: 100%; text-align: center; padding: 0.85rem 1.5rem; font-size: 1rem; font-weight: 500; border-radius: 6px; cursor: pointer; text-decoration: none; border: 1px solid var(--border-color); background: #ffffff; color: var(--text-main); transition: all 0.2s; }
         .btn:hover { background: #f4f5f7; }
         .btn-primary { background: var(--accent-color); color: #ffffff; border-color: var(--accent-color); }
         .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+
+        /* Plan Details Modal */
+        .modal-backdrop { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; padding: 1.5rem; z-index: 9000; }
+        .modal-backdrop.active { display: flex; }
+        .modal-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 14px; max-width: 560px; width: 100%; padding: 2rem 2.25rem; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22); position: relative; max-height: 90vh; overflow-y: auto; }
+        .modal-close { position: absolute; top: 1.25rem; right: 1.25rem; width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border-color); background: #ffffff; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+        .modal-close:hover { color: var(--text-main); background: #f4f5f7; }
+        .modal-tag { display: inline-block; background: var(--popular-bg); color: var(--accent-color); font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.7rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.75rem; }
+        .modal-title { font-size: 1.65rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem; }
+        .modal-price { font-size: 1.5rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; }
+        .modal-price span { font-size: 0.9rem; font-weight: 400; color: var(--text-muted); }
+        .modal-summary { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.25rem; }
+        .modal-audience { background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.85rem 1rem; font-size: 0.9rem; color: var(--text-main); margin-bottom: 1.5rem; }
+        .modal-section-label { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text-muted); margin-bottom: 0.75rem; }
+        .modal-deliverables { list-style: none; margin-bottom: 1.75rem; }
+        .modal-deliverables li { display: flex; align-items: flex-start; gap: 0.65rem; margin-bottom: 0.65rem; font-size: 0.93rem; color: var(--text-main); line-height: 1.45; }
+        .modal-deliverables li i { color: var(--accent-color); margin-top: 0.2rem; }
+        .modal-footer-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .modal-footer-actions .btn { flex: 1 1 180px; }
 
         /* Footer */
         footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; background: #ffffff; border-top: 1px solid var(--border-color); }
@@ -112,7 +133,10 @@
                     <li><i class="fa-solid fa-check"></i> Capacitación básica del sistema</li>
                     <li><i class="fa-solid fa-check"></i> Incluye acompañamiento a $200/mes</li>
                 </ul>
-                <a href="mailto:hola@hextock.com" class="btn">Solicitar Paquete</a>
+                <div class="card-actions">
+                    <button type="button" class="btn btn-details" data-plan="Fase 1: Migración">Ver detalles</button>
+                    <button type="button" class="btn btn-primary btn-contratar-plan" data-plan="Fase 1: Migración">Contratar suscripción</button>
+                </div>
             </div>
 
             <!-- Fase 2: Rescate -->
@@ -126,7 +150,10 @@
                     <li><i class="fa-solid fa-check"></i> Eliminación de sobreventas</li>
                     <li><i class="fa-solid fa-check"></i> Optimización de procesos en Shopify</li>
                 </ul>
-                <a href="mailto:hola@hextock.com" class="btn">Solicitar Paquete</a>
+                <div class="card-actions">
+                    <button type="button" class="btn btn-details" data-plan="Fase 2: Rescate">Ver detalles</button>
+                    <button type="button" class="btn btn-primary btn-contratar-plan" data-plan="Fase 2: Rescate">Contratar suscripción</button>
+                </div>
             </div>
 
             <!-- Fase 3: Acompañamiento -->
@@ -141,10 +168,33 @@
                     <li><i class="fa-solid fa-check"></i> Reportes estratégicos de inventario</li>
                     <li><i class="fa-solid fa-check"></i> Dashboard en tiempo real vía link</li>
                 </ul>
-                <a href="#" id="btnContratar" class="btn btn-primary">Contratar suscripción</a>
+                <div class="card-actions">
+                    <button type="button" class="btn btn-details" data-plan="Fase 3: Acompañamiento">Ver detalles</button>
+                    <button type="button" class="btn btn-primary btn-contratar-plan" id="btnContratar" data-plan="Fase 3: Acompañamiento">Contratar suscripción</button>
+                </div>
             </div>
         </div>
     </main>
+
+    <!-- Modal de Detalles del Plan -->
+    <div class="modal-backdrop" id="planModalBackdrop" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalPlanTitle">
+            <button type="button" class="modal-close" id="closePlanModal" aria-label="Cerrar ventana">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <span class="modal-tag" id="modalPlanTag">E-COMMERCE</span>
+            <h2 class="modal-title" id="modalPlanTitle">Fase 3: Acompañamiento</h2>
+            <div class="modal-price" id="modalPlanPrice">$199 <span>/ mes</span></div>
+            <p class="modal-summary" id="modalPlanSummary"></p>
+            <div class="modal-audience" id="modalPlanAudience"></div>
+            <div class="modal-section-label">Qué incluye este paquete</div>
+            <ul class="modal-deliverables" id="modalPlanDeliverables"></ul>
+            <div class="modal-footer-actions">
+                <button type="button" class="btn btn-primary" id="modalContratarBtn">Contratar suscripción</button>
+                <button type="button" class="btn" id="modalDismissBtn">Seguir comparando</button>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-links">
@@ -159,6 +209,51 @@
     <script>
         const SUPABASE_URL = 'https://gbeuhhnaspsfcldqrfsu.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_oU3dBh8r1dDmBC191FMG-g_QY1fk11R';
+
+        const PLANS_CATALOG = {
+            'Fase 1: Migración': {
+                tag: 'E-commerce desde cero',
+                price: '$499',
+                billing: 'primer pago (incluye acompañamiento a $200/mes)',
+                summary: 'Lanzamos tu operación digital en Shopify con estructura lista para vender, cobrar y controlar tu catálogo desde el primer día.',
+                audience: '<strong>Ideal para:</strong> negocios físicos o marcas que quieren abrir o migrar su tienda a Shopify sin perder tiempo configurando todo desde cero.',
+                deliverables: [
+                    'Configuración inicial de tienda Shopify, dominios, impuestos y envíos.',
+                    'Carga, categorización y depuración inicial de tu catálogo de productos.',
+                    'Conexión y prueba de pasarelas de pago y métodos de cobro.',
+                    'Capacitación práctica para que tu equipo opere pedidos y stock.',
+                    'Continuidad operativa con acompañamiento mensual a $200/mes.'
+                ]
+            },
+            'Fase 2: Rescate': {
+                tag: 'Adiós al desorden',
+                price: '$299',
+                billing: 'pago único',
+                summary: 'Diagnosticamos y corregimos fugas de inventario, SKU duplicados y cruces entre canales para devolver estabilidad a tu operación.',
+                audience: '<strong>Ideal para:</strong> tiendas que ya venden en línea pero sufren sobreventas, quiebres de stock inesperados o bases de datos desordenadas.',
+                deliverables: [
+                    'Auditoría técnica de inventario, SKUs y bases de datos actuales.',
+                    'Sincronización y orden multi-almacén para evitar discrepancias.',
+                    'Reglas y ajustes operativos para reducir sobreventas y cancelaciones.',
+                    'Optimización de flujos y procesos clave dentro de Shopify.'
+                ]
+            },
+            'Fase 3: Acompañamiento': {
+                tag: 'Reportes y asesoría',
+                price: '$199',
+                billing: '/ mes',
+                summary: 'Soporte mensual continuo para mantener tu catálogo al día, monitorear existencias y tomar decisiones con datos claros.',
+                audience: '<strong>Ideal para:</strong> negocios en crecimiento que buscan un aliado constante en operación y visibilidad de inventario mes a mes.',
+                deliverables: [
+                    'Mantenimiento continuo y ajustes operativos recurrentes en tu tienda.',
+                    'Carga y actualización periódica de productos, variantes y existencias.',
+                    'Reportes estratégicos de rotación, alertas de stock y desempeño.',
+                    'Acceso a dashboard en tiempo real vía enlace compartido.'
+                ]
+            }
+        };
+
+        let selectedPlanName = 'Fase 3: Acompañamiento';
 
         if (typeof window.supabaseClient === 'undefined') {
             window.supabaseClient = null;
@@ -181,6 +276,32 @@
                 toast.style.transition = 'all 0.3s ease';
                 setTimeout(() => toast.remove(), 300);
             }, 3500);
+        }
+
+        function openPlanModal(planName) {
+            const plan = PLANS_CATALOG[planName] || PLANS_CATALOG['Fase 3: Acompañamiento'];
+            selectedPlanName = planName;
+
+            document.getElementById('modalPlanTag').textContent = plan.tag;
+            document.getElementById('modalPlanTitle').textContent = planName;
+            document.getElementById('modalPlanPrice').innerHTML = `${plan.price} <span>${plan.billing}</span>`;
+            document.getElementById('modalPlanSummary').textContent = plan.summary;
+            document.getElementById('modalPlanAudience').innerHTML = plan.audience;
+
+            const listEl = document.getElementById('modalPlanDeliverables');
+            listEl.innerHTML = plan.deliverables
+                .map(item => `<li><i class="fa-solid fa-circle-check"></i><span>${item}</span></li>`)
+                .join('');
+
+            const backdrop = document.getElementById('planModalBackdrop');
+            backdrop.classList.add('active');
+            backdrop.setAttribute('aria-hidden', 'false');
+        }
+
+        function closePlanModal() {
+            const backdrop = document.getElementById('planModalBackdrop');
+            backdrop.classList.remove('active');
+            backdrop.setAttribute('aria-hidden', 'true');
         }
 
         async function updateNavbarAuth() {
@@ -223,9 +344,10 @@
             }
         }
 
-        window.contratarPlanFase3 = async function(e) {
+        window.contratarPlan = async function(e, explicitPlanName) {
             if (e) e.preventDefault();
 
+            const planToContract = explicitPlanName || selectedPlanName || 'Fase 3: Acompañamiento';
             let currentUser = null;
 
             if (window.supabaseClient) {
@@ -240,13 +362,13 @@
             }
 
             if (!currentUser) {
-                showToast('Por favor, inicia sesión para contratar un plan.', 'warning');
+                showToast(`Inicia sesión para contratar ${planToContract}.`, 'warning');
                 setTimeout(() => {
+                    const loginUrl = `Login.html?plan=${encodeURIComponent(planToContract)}`;
                     try {
-                        const targetUrl = new URL('Login.html', window.location.href).href;
-                        window.location.href = targetUrl;
+                        window.location.href = new URL(loginUrl, window.location.href).href;
                     } catch (navErr) {
-                        window.location.assign('Login.html');
+                        window.location.assign(loginUrl);
                     }
                 }, 1200);
                 return;
@@ -257,7 +379,7 @@
                 .insert([
                     {
                         user_id: currentUser.id,
-                        plan_name: 'Fase 3: Acompañamiento',
+                        plan_name: planToContract,
                         status: 'active'
                     }
                 ]);
@@ -265,22 +387,61 @@
             if (error) {
                 showToast('Hubo un error al procesar tu suscripción: ' + error.message, 'error');
             } else {
-                showToast('¡Suscripción a Fase 3: Acompañamiento contratada con éxito!', 'success');
+                closePlanModal();
+                showToast(`¡Suscripción a ${planToContract} contratada con éxito!`, 'success');
             }
         };
+
+        window.contratarPlanFase3 = (e) => window.contratarPlan(e, 'Fase 3: Acompañamiento');
 
         document.addEventListener('DOMContentLoaded', () => {
             initSupabase();
             updateNavbarAuth();
 
-            const btn = document.getElementById('btnContratar');
-            if (btn) {
-                btn.addEventListener('click', window.contratarPlanFase3);
+            document.querySelectorAll('.btn-details').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const planName = btn.getAttribute('data-plan');
+                    openPlanModal(planName);
+                });
+            });
+
+            document.querySelectorAll('.btn-contratar-plan').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const planName = btn.getAttribute('data-plan');
+                    window.contratarPlan(e, planName);
+                });
+            });
+
+            const modalContratarBtn = document.getElementById('modalContratarBtn');
+            if (modalContratarBtn) {
+                modalContratarBtn.addEventListener('click', (e) => window.contratarPlan(e, selectedPlanName));
             }
+
+            const closeModalBtn = document.getElementById('closePlanModal');
+            const dismissModalBtn = document.getElementById('modalDismissBtn');
+            const modalBackdrop = document.getElementById('planModalBackdrop');
+
+            if (closeModalBtn) closeModalBtn.addEventListener('click', closePlanModal);
+            if (dismissModalBtn) dismissModalBtn.addEventListener('click', closePlanModal);
+            if (modalBackdrop) {
+                modalBackdrop.addEventListener('click', (e) => {
+                    if (e.target === modalBackdrop) closePlanModal();
+                });
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closePlanModal();
+            });
 
             const logoutBtn = document.getElementById('btn-logout');
             if (logoutBtn) {
                 logoutBtn.addEventListener('click', handleLogout);
+            }
+
+            const params = new URLSearchParams(window.location.search);
+            const preselectedPlan = params.get('plan');
+            if (preselectedPlan && PLANS_CATALOG[preselectedPlan]) {
+                openPlanModal(preselectedPlan);
             }
         });
     </script>
