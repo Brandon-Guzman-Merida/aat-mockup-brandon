@@ -182,6 +182,31 @@
                 setTimeout(() => toast.remove(), 300);
             }, 3500);
         }
+        async function updateNavbarAuth() {
+    const authItem = document.getElementById('nav-auth-item');
+    const userLabel = document.getElementById('nav-user-label');
+    if (!window.supabaseClient || !authItem || !userLabel) return;
+
+    const { data: { user } } = await window.supabaseClient.auth.getUser();
+    if (user) {
+        const displayIdentity = user.user_metadata?.full_name || user.email || 'Usuario activo';
+        userLabel.textContent = displayIdentity;
+        authItem.style.display = 'flex';
+    } else {
+        authItem.style.display = 'none';
+    }
+}
+
+async function handleLogout() {
+    if (!window.supabaseClient) return;
+    const { error } = await window.supabaseClient.auth.signOut();
+    if (error) {
+        showToast('No se pudo cerrar sesión: ' + error.message, 'error');
+        return;
+    }
+    showToast('Sesión cerrada.', 'info');
+    updateNavbarAuth();
+}
 
         function initSupabase() {
             try {
