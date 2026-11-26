@@ -67,32 +67,7 @@
         .toast.warning { border-left-color: #fab387; }
         @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
-        /* Interactive Supabase Console / Debug Panel */
-        .supabase-debugger { position: fixed; bottom: 0; left: 0; right: 0; height: 230px; background: var(--console-bg); color: var(--console-text); border-top: 2px solid #45475a; z-index: 1000; font-family: 'Courier New', Courier, monospace; display: flex; flex-direction: column; box-shadow: 0 -5px 20px rgba(0,0,0,0.3); }
-        .debugger-header { background: #11111b; padding: 0.5rem 1rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #313244; font-size: 0.85rem; }
-        .debugger-title { color: #cdd6f4; font-weight: bold; display: flex; align-items: center; gap: 0.5rem; }
-        .status-badge { font-size: 0.75rem; padding: 2px 8px; border-radius: 12px; background: #a6e3a1; color: #11111b; font-weight: bold; }
-        .status-badge.offline { background: #f38ba8; color: #11111b; }
-        .debugger-controls { display: flex; gap: 0.5rem; align-items: center; }
-        .debugger-btn { background: #313244; color: #cdd6f4; border: 1px solid #45475a; padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; cursor: pointer; }
-        .debugger-btn:hover { background: #45475a; }
-        .debugger-body { flex: 1; display: grid; grid-template-columns: 280px 1fr; overflow: hidden; }
-        .debugger-sidebar { background: #181825; padding: 0.75rem; border-right: 1px solid #313244; font-size: 0.8rem; overflow-y: auto; }
-        .sidebar-section { margin-bottom: 0.75rem; }
-        .sidebar-label { color: #89b4fa; font-weight: bold; margin-bottom: 0.25rem; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.5px; }
-        .debugger-logs { padding: 0.75rem; overflow-y: auto; font-size: 0.82rem; display: flex; flex-direction: column; gap: 4px; background: #1e1e2e; }
-        .log-entry { display: flex; gap: 0.5rem; line-height: 1.4; word-break: break-all; }
-        .log-time { color: #6c7086; }
-        .log-info { color: #89b4fa; }
-        .log-success { color: #a6e3a1; }
-        .log-warn { color: #f9e2af; }
-        .log-error { color: #f38ba8; }
-
-        footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; background: #ffffff; border-top: 1px solid var(--border-color); }
-        .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 0.75rem; }
-        .footer-links a { color: var(--text-muted); text-decoration: none; }
-        .footer-links a:hover { color: var(--text-main); }
-    </style>
+      
 </head>
 <body>
 
@@ -171,42 +146,6 @@
         </div>
         <p>&copy; 2026 Hextock. Todos los derechos reservados.</p>
     </footer>
-
-    <!-- Interactive Supabase Live Debugger Overlay -->
-    <div class="supabase-debugger">
-        <div class="debugger-header">
-            <div class="debugger-title">
-                <i class="fa-solid fa-bolt" style="color: #f9e2af;"></i>
-                Supabase Real-Time Monitor
-                <span class="status-badge" id="clientStatus">Conectado JS v2</span>
-            </div>
-            <div class="debugger-controls">
-                <button class="debugger-btn" onclick="toggleSimulatedAuth()" id="authSimBtn">
-                    <i class="fa-solid fa-user-gear"></i> Simular Usuario Logueado: <strong id="simStatusState">OFF</strong>
-                </button>
-                <button class="debugger-btn" onclick="clearLogs()"><i class="fa-solid fa-trash"></i> Limpiar Console</button>
-            </div>
-        </div>
-        <div class="debugger-body">
-            <div class="debugger-sidebar">
-                <div class="sidebar-section">
-                    <div class="sidebar-label">Supabase Endpoint</div>
-                    <div style="color:#a6adc8; word-break:break-all;" id="dispUrl">https://gbeuhhnaspsfcldqrfsu.supabase.co</div>
-                </div>
-                <div class="sidebar-section">
-                    <div class="sidebar-label">Estado de Autenticación</div>
-                    <div id="dispUser" style="color:#f9e2af;"><i class="fa-solid fa-circle-user"></i> No autenticado (null)</div>
-                </div>
-                <div class="sidebar-section">
-                    <div class="sidebar-label">Tabla Destino</div>
-                    <div style="color:#a6e3a1;"><i class="fa-solid fa-table"></i> public.subscriptions</div>
-                </div>
-            </div>
-            <div class="debugger-logs" id="consoleLogs">
-                <!-- Log entries auto populate here -->
-            </div>
-        </div>
-    </div>
 
     <!-- Official Supabase JS v2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
